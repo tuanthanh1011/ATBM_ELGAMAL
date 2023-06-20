@@ -1,0 +1,74 @@
+.wrap {
+  width: 100%;
+  display: flex; }
+
+.block {
+  width: 50%; }
+
+.container {
+  text-align: left;
+  margin-left: 115px; }
+
+.block_item {
+  display: flex;
+  align-items: center; }
+
+textarea {
+  font-size: 14px;
+  padding: 0 10px 0 10px;
+  width: 200px;
+  height: 150px;
+  margin-bottom: 10px; }
+
+h2 {
+  text-align: center;
+  margin-left: -150px; }
+
+button {
+  width: 120px;
+  height: 40px;
+  background-color: aqua;
+  border: none;
+  cursor: pointer;
+  margin: 8px 8px; }
+
+button:hover {
+  border: 1px solid #000; }
+
+h4 {
+  display: inline-block;
+  width: 100px; }
+
+.inf_item-input {
+  width: 50px; }
+
+.inf {
+  border: 1px solid #ccc;
+  padding: 32px 18px 32px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.inf_item {
+  margin: 0px 24px; }
+
+.btns {
+  display: flex;
+  flex-direction: column-reverse; }
+
+.btn_file {
+  display: flex;
+  position: absolute;
+  margin-left: 320px;
+  align-items: center; }
+
+.btn_file button {
+  z-index: 5; }
+
+.block_chuky_ps {
+  display: flex;
+  align-items: center; }
+
+.btn_kt_ky,
+.btn_ky {
+  margin-left: 200px; }

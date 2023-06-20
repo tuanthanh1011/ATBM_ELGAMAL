@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+    <h1 style="text-align: center;">CHỮ KÝ ELGAMAL</h1>
+    <div class="wrap">
+        <div class="block" style="border-right: 1px solid #ccc; padding-right: 15px">
+            <div class="container">
+                <h2 class="titlte">
+                    PHÁT SINH CHỮ KÝ
+                </h2>
+                <div class="block_vanbanky__ps block_item">
+                    <h4>Văn bản ký: </h4>
+                    <textarea type="text" class="vanbanky_ps"></textarea>
+                    <div class="btn_file">
+                        <button class="btn-file_vanbanky_ps">File</button>
+                        <input style="margin-left: -80px;" type="file" class="file_vanbanky_ps">
+                    </div>
+                </div>
+                <button class="btn_ky" style="margin-bottom: 16px">Ký</button>
+
+                <div class="block_hambam__ps block_item">
+                    <h4>Hàm băm SHA: </h4>
+                    <textarea style="height: 60px;" type="text" class="hambam_ps"></textarea>
+                </div>
+                <div class="block_chuky_ps">
+                    <h4>Chữ ký: </h4>
+                    <textarea type="text" class="chuky_ps block_item"> </textarea>
+                    <div class="btns">
+                        <button class="btn-chuyen">Chuyển</button>
+                        <button class="btn-luu">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <h2 class="titlte">
+                    KIỂM TRA CHỮ KÝ
+                </h2>
+                <div class="block_vanbanky_kt block_item">
+                    <h4>Văn bản ký: </h4>
+                    <textarea type="text" class="vanbanky_kt"> </textarea>
+                    <div class="btn_file">
+                        <button class="btn-file_vanbanky_kt">File văn bản</button>
+                        <input style="margin-left: -80px;" type="file" class="file_vanbanky_kt">
+                    </div>
+                </div>
+                <div class="block_chuky_kt block_item">
+                    <h4>Chữ ký: </h4>
+                    <textarea type="text" class="chuky_kt"> </textarea>
+                    <div class="btn_file">
+                        <button class="btn-file_chuky_kt">File chữ ký</button>
+                        <input style="margin-left: -80px;" type="file" class="file_chuky_kt">
+                    </div>
+                </div>
+                <button class="btn_kt_ky">Kiểm tra chữ ký</button>
+                <div class=" block_chuky_kt block_item">
+                    <h4>Thông báo: </h4>
+                    <textarea style="height: 18px; margin-top: 8px" type="text" class="vanbanky_kt_tb"> </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <b style="position: relative; top: 58px; left: 56%">Thực hiện ký</b>
+    <div class="inf">
+        <div>
+            <div style="display:flex; border: 1px solid #ccc; padding: 12px; margin-bottom: 8px">
+                <b>Khóa công khai (p, α, β)</b>
+                <div class="inf_item">
+                    Số nguyên tố p
+                    <input type="text" class="p inf_item-input">
+                </div>
+                <div class="inf_item">
+                    Số α
+                    <input type="text" class="alpha inf_item-input">
+                </div>
+                <div class="inf_item">
+                    (β = α^a mod p) β
+                    <input type="text" class="beta inf_item-input">
+                </div>
+            </div>
+            <div style="display:flex; border: 1px solid #ccc; padding: 12px 12px">
+                <b> Khóa bí mật (a)</b>
+                <div class="inf_item" style="margin-left: 80px">
+                    Số nguyên a
+                    <input style="margin-left: 16px" type="text" class="a inf_item-input">
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; border:1px solid #ccc; margin-left: 12px; align-items: center; height: 100px">
+            <div class="inf_item">
+                Số ngẫu nhiên k
+                <input type="text" class="k inf_item-input">
+            </div>
+            <div class="inf_item">
+                (γ = α^k mod p) γ
+                <input type="text" class="gamma inf_item-input">
+            </div>
+        </div>
+        <button class="delete" style="margin-left: 40px">Xóa dữ liệu</button>
+    </div>
+</body>
+<script src="/model/bundle.js"></script>
+
+</html>
