@@ -33,9 +33,10 @@ const outputBeta = $('.beta');
 const outputK = $('.k');
 const outputGamma = $('.gamma');
 const hambamSHA = $('.hambam_ps');
+const btnCreateKey = $('.createKey');
 
 let a, beta, p, alpha, k;
-let check = 0, check1 = 0;
+let check = 0, check1 = 0, check2 = false;
 
 resetData();
 
@@ -145,6 +146,11 @@ function createKey() {
 
     // Tính beta = alpha^a mod p
     beta = BinhPhuongVaNhan(alpha, a, p);
+    outputP.value = p;
+    outputAlpha.value = alpha;
+    outputA.value = a;
+    outputBeta.value = beta;
+    check2 = true;
 }
 
 // Hàm chuyển đổi xâu thành mảng byte
@@ -195,50 +201,47 @@ function base64ToArray(base64) {
 
 function hamKyElgamal() {
     if (txtVanbankyPS.value != "") {
-        let banMa = [];
-        let j = 0;
-        let y1, y2;
-        let result = "";
-        // Tạo p, a, alpha, beta
+        if (check2 == true) {
+            let banMa = [];
+            let j = 0;
+            let y1, y2;
+            let result = "";
 
-        createKey();
-
-        k = getRandomNumber(1, p - 2);
-        while (GCD(k, p - 1) != 1) {
             k = getRandomNumber(1, p - 2);
+            while (GCD(k, p - 1) != 1) {
+                k = getRandomNumber(1, p - 2);
+            }
+
+            // Chuyển đổi xâu thành mảng byte
+            let byteArray = stringToByteArray(txtVanbankyPS.value);
+
+            // Băm mảng byte bằng SHA-256 và trả về chuỗi Base64
+            let hash = crypto.createHash("sha256").update(byteArray).digest("base64");
+
+            // Chuyển đổi chuỗi Base64 thành mã Unicode (dạng số)
+            let unicodeArray = base64ToUnicodeArray(hash);
+
+            y1 = BinhPhuongVaNhan(alpha, k, p);
+
+            outputK.value = k;
+            outputGamma.value = y1;
+            hambamSHA.value = hash;
+
+            for (var i = 0; i < unicodeArray.length; i++) {
+                banMa[j] = y1;
+                let k_nd = EuclidMoRong(k, p - 1);
+                let check = ((unicodeArray[i] - a * y1) * k_nd) % (p - 1);
+
+                y2 = check < 0 ? (p - 1) + check : check;
+                banMa[j + 1] = y2;
+                j += 2;
+            }
+
+            var base64String = arrayToBase64(banMa);
+            txtChukyPS.value = base64String;
         }
-
-        // Chuyển đổi xâu thành mảng byte
-        let byteArray = stringToByteArray(txtVanbankyPS.value);
-
-        // Băm mảng byte bằng SHA-256 và trả về chuỗi Base64
-        let hash = crypto.createHash("sha256").update(byteArray).digest("base64");
-
-        // Chuyển đổi chuỗi Base64 thành mã Unicode (dạng số)
-        let unicodeArray = base64ToUnicodeArray(hash);
-
-        y1 = BinhPhuongVaNhan(alpha, k, p);
-        outputP.value = p;
-        outputAlpha.value = alpha;
-        outputA.value = a;
-        outputBeta.value = beta;
-        outputK.value = k;
-        outputGamma.value = y1;
-        hambamSHA.value = hash;
-        
-        for (var i = 0; i < unicodeArray.length; i++) {
-            banMa[j] = y1;
-            let k_nd = EuclidMoRong(k, p - 1);
-            let check = ((unicodeArray[i] - a * y1) * k_nd) % (p - 1);
-
-            y2 = check < 0 ? (p - 1) + check : check;
-            banMa[j + 1] = y2;
-            j += 2;
-        }
-
-        var base64String = arrayToBase64(banMa);
-        txtChukyPS.value = base64String;
-
+        else
+            alert("Chưa tạo khóa!");
     }
     else
         alert("Chưa nhập văn bản ký!");
@@ -445,6 +448,7 @@ function resetData() {
     btnInputChuKyKT.value = "";
     check = 0;
     hambamSHA.value = "";
+    check2 = false;
 }
 
 // Handle Event
@@ -500,3 +504,4 @@ btnLuu.addEventListener('click', function () {
 })
 
 btnDelete.addEventListener('click', resetData)
+btnCreateKey.addEventListener('click', createKey)
